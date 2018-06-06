@@ -25,6 +25,8 @@
   import org.exoplatform.social.webui.composer.UIComposer;
   import org.exoplatform.social.webui.profile.UIUserActivitiesDisplay;
   import org.exoplatform.social.webui.Utils;
+  import org.exoplatform.service.ActivityComposerConfigurationService;
+  import org.exoplatform.container.ExoContainerContext;
   
   def currentRemoteId = Utils.getViewerRemoteId();
   def currentServerTime = java.util.Calendar.getInstance().getTimeInMillis();
@@ -58,13 +60,15 @@
     }
     requireJs.addScripts("activity.setPageTitle(window.encodeURIComponent(\""+ activityTitle.replace("\"", "\\42").replace("\n", "").replace("\r", "") +"\").replace(/'/, '%27'));");
   }
-  
+  ActivityComposerConfigurationService activityComposerConfigurationService = (ActivityComposerConfigurationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ActivityComposerConfigurationService.class);
+  def userActivityComposerState = activityComposerConfigurationService.getUserActivityComposerState().equals("true");
+    
 %>
 <div class="uiSocApplication uiUserActivityStreamPortlet uiUserActivityDetail" id="$uicomponent.id">
   <div class="uiTabPane $uiTabClazz">
  	 <div class="uiUserActivitiesContainer">
       <% uicomponent.renderChild(PopupContainer.class); %>
-      <%if (uicomponent.isComposerDisplayed()) {%>  
+      <%if (uicomponent.isComposerDisplayed() && !userActivityComposerState) {%>  
          <% uicomponent.renderChild(UIComposer.class); %>
       <%}%>
       <% uicomponent.renderChild(UIUserActivitiesDisplay.class); %>
