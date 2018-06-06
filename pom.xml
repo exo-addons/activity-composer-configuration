@@ -28,7 +28,7 @@
     </parent>
     <groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
     <artifactId>activity-composer-configuration-addon</artifactId>
-    <version>1.0.x-SNAPSHOT</version>
+    <version>1.0.0-RC01</version>
     <packaging>pom</packaging>
     <name>AS composer configuration addon</name>
     <description>AS composer configuration addon</description>
@@ -41,7 +41,7 @@
     <scm>
         <connection>scm:git:git://github.com/exo-addons/activity-composer-configuration.git</connection>
         <developerConnection>scm:git:git@github.com:exo-addons/activity-composer-configuration.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.0.0-RC01</tag>
         <url>https://github.com/exo-addons/activity-composer-configuration</url>
     </scm>
     <properties>
