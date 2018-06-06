@@ -1,0 +1,63 @@
+#activityComposerConfiguration {
+	margin-top: 50px; 
+}
+
+#activityComposerConfiguration .control-label {
+	margin-bottom: 10px;
+	font-weight: bold; 
+}
+
+#spaceActivityComposerConfiguration {
+	height: 200px;
+}
+
+#spaceActivityComposerConfiguration select {
+	height: 120px;
+} 
+
+#spacesWithActivityComposer, #buttons, #spacesWithoutActivityComposer {
+	width: 33%;
+}
+
+#spacesWithActivityComposer, #buttons, #spacesWithoutActivityComposer  {
+	float: left;
+}
+
+#buttons a {
+	cursor: pointer;
+}
+
+#buttons a:first-child {
+	margin-right: 10px;
+}
+
+.uiIconNextArrow:before {
+    margin-left: 0;
+}
+
+.uiIconPrevArrow:before {
+    margin-left: 100px;
+}
+
+.success, .failure, .selectSpaceWarning {
+	font-weight: bold;
+	text-align: center;
+}
+
+.failure {
+	color: red;
+}
+
+.selectSpaceWarning {
+	color: orange;
+}
+
+#userActivityComposerConfiguration {
+	margin-top: 20px; 
+}
+
+#userActivityComposerConfiguration .control-label {
+	width: 50%;
+	float: left;
+}
+

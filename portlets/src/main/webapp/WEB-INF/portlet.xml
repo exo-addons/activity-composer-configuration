@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="2.0"
+             xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+   
+   <portlet>
+	    <portlet-name>ActivityComposerConfigurationPortlet</portlet-name>
+	    <display-name xml:lang="EN">AS Composer Configuration Portlet</display-name>
+	    <portlet-class>org.exoplatform.portlets.activityComposerConfiguration.ActivityComposerConfigurationPortlet</portlet-class>
+		<init-param>
+			<name>juzu.run_mode</name>
+			<value>prod</value>
+		</init-param>
+	    <supports>
+	      <mime-type>text/html</mime-type>
+	      <portlet-mode>edit</portlet-mode>
+	    </supports>
+	    <supported-locale>fr</supported-locale>
+	    <resource-bundle>locale.portlets.activity-composer-configuration-portlet</resource-bundle>
+	    <portlet-info>
+	      <title>AS Composer Configuration Portlet</title>
+	      <keywords>AS Composer Configuration Portlet</keywords>
+	    </portlet-info>
+    </portlet>
+</portlet-app>
