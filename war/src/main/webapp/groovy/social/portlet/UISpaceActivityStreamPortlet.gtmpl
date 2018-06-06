@@ -22,10 +22,23 @@
 %>
 <%
   import org.exoplatform.social.webui.Utils;
+  import org.exoplatform.social.core.space.model.Space;
+  import org.exoplatform.social.core.space.spi.SpaceService;
+  import org.exoplatform.service.ActivityComposerConfigurationService;
+  import org.exoplatform.container.ExoContainerContext;
+  import org.exoplatform.services.security.ConversationState;
+  import org.exoplatform.services.security.Identity;
   
   def labelOutOfSpaceContext = _ctx.appRes("UISpacePortlet.label.OutOfSpaceContext"); 
   
   uicomponent.refresh();
+
+  SpaceService spaceService = uicomponent.getSpaceService();
+  Space currentSpace = uicomponent.getSpace();
+  ActivityComposerConfigurationService activityComposerConfigurationService = (ActivityComposerConfigurationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ActivityComposerConfigurationService.class);
+  def listSpacesWithActivityComposer = activityComposerConfigurationService.getListSpacesWithActivityComposer();
+  Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+  def canCompose = (spaceService.isManager(currentSpace, Utils.getViewerRemoteId()) || currentIdentity.isMemberOf("/platform/administrators")) && listSpacesWithActivityComposer.contains(currentSpace);
 
   print("<div class=\"visible-desktop\"></div>");
   print("<div class=\"visible-tablet\"></div>");
@@ -40,7 +53,12 @@
           def requireJs = _ctx.getRequestContext().getJavascriptManager().getRequireJS();
           requireJs.require("SHARED/social-ui-activity", "activity")
                    .addScripts("activity.responsiveMobile('" + uicomponent.id + "');");
-          uicomponent.renderChildren();
+		  def children = uicomponent.getChildren();
+		  for (def child : children) {
+		  	if (!child.getName().equals("UIComposer") || canCompose) {
+				uicomponent.renderChild(child);
+			}
+		  }
         } else {
       %>
       <div class="uiSpaceMenu">$labelOutOfSpaceContext</div>
