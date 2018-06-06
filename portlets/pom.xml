@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
 		<artifactId>activity-composer-configuration-addon</artifactId>
-		<version>1.0.0-RC01</version>
+		<version>1.0.x-SNAPSHOT</version>
 	</parent>
 	<artifactId>activity-composer-configuration-addon-portlets</artifactId>
 
