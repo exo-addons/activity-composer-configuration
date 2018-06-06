@@ -1,0 +1,36 @@
+<div id="activityComposerConfiguration"
+	ng-controller="activityComposerConfigurationCtrl">
+	<div id="spaceActivityComposerConfiguration">
+		<div id="spacesWithActivityComposer" class="control-group">
+			<div class="control-label">Liste des espaces avec composer</div>
+			<div class="controls">
+				<select ng-model="spaceWithActivityComposer" multiple>
+					<option ng-repeat="space in spacesWithActivityComposer"
+						value="{{space.name}}">{{space.label}}</option>
+				</select>
+			</div>
+		</div>
+		<div id="buttons">
+			<a ng-click='hideSpaceActivityComposer()' title="Ajouter">Ajouter <i class="uiIconNextArrow"></i></a>
+			<a ng-click='showSpaceActivityComposer()' title="Supprimer"><i class="uiIconPrevArrow"></i> Supprimer</a>
+		</div>
+		<div id="spacesWithoutActivityComposer" class="control-group">
+			<div class="control-label">Liste des espaces sans composer</div>
+			<div class="controls">
+				<select ng-model="spaceWithoutActivityComposer" multiple>
+					<option ng-repeat="space in spacesWithoutActivityComposer"
+						value="{{space.name}}">{{space.label}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="selectSpaceWarning" ng-show="spaceWithActivityComposer == '' || spacesWithoutActivityComposer == ''" ng-cloak>{{selectSpaceWarning}}</div>
+		<div class="{{configureSpacesComposerResult}}" ng-show="configureSpacesComposerResult != ''" ng-cloak>{{configureSpacesComposerResultMessage}}</div>
+	</div>
+	<div id="userActivityComposerConfiguration" class="control-group">
+		<div class="control-label">Cacher le composer de la file d'actualité des utilisateurs</div>
+		<div class="controls">
+			<input type="checkbox" ng-model="hideUserActivityComposer" ng-change="showHideUserActivityComposer()">
+		</div>
+		<div class="{{configureUsersComposerResult}}" ng-show="configureUsersComposerResult != ''" ng-cloak>{{configureUsersComposerResultMessage}}</div>
+	</div>
+</div>
