@@ -38,7 +38,7 @@
   ActivityComposerConfigurationService activityComposerConfigurationService = (ActivityComposerConfigurationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ActivityComposerConfigurationService.class);
   def listSpacesWithActivityComposer = activityComposerConfigurationService.getListSpacesWithActivityComposer();
   Identity currentIdentity = ConversationState.getCurrent().getIdentity();
-  def canCompose = (spaceService.isManager(currentSpace, Utils.getViewerRemoteId()) || currentIdentity.isMemberOf("/platform/administrators")) && listSpacesWithActivityComposer.contains(currentSpace);
+  def canCompose = spaceService.isManager(currentSpace, Utils.getViewerRemoteId()) || currentIdentity.isMemberOf("/platform/administrators") || listSpacesWithActivityComposer.contains(currentSpace);
 
   print("<div class=\"visible-desktop\"></div>");
   print("<div class=\"visible-tablet\"></div>");
