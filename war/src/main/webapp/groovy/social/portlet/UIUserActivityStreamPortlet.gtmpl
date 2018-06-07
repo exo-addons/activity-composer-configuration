@@ -70,8 +70,19 @@
       <% uicomponent.renderChild(PopupContainer.class); %>
       <%if (uicomponent.isComposerDisplayed() && !userActivityComposerState) {%>  
          <% uicomponent.renderChild(UIComposer.class); %>
-      <%}%>
-      <% uicomponent.renderChild(UIUserActivitiesDisplay.class); %>
+      <%} 
+	  else {
+	  %>
+		<style>
+			@media (min-width: 768px) {
+				.uiUserActivityStreamPortlet .activityTop {
+					margin-top: -30px;
+				}
+			}
+		</style>
+	  <%
+	  }
+      uicomponent.renderChild(UIUserActivitiesDisplay.class); %>
     </div>
   </div>
 </div>

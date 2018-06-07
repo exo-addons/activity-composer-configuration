@@ -58,6 +58,15 @@
 		  	if (!child.getName().equals("UIComposer") || canCompose) {
 				uicomponent.renderChild(child);
 			}
+			else {%>
+				<style>
+					@media (min-width: 768px) {
+						.uiDisplaySpaceActivities.uiActivitiesDisplay .activityTop {
+							margin-top: 0;
+						}
+					}
+				</style>
+			<%}
 		  }
         } else {
       %>
