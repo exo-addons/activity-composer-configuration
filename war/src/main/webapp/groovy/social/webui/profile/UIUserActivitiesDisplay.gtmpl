@@ -26,6 +26,8 @@
   import org.exoplatform.social.core.service.LinkProvider;
   import org.exoplatform.social.webui.Utils;
   import java.util.Calendar;
+  import org.exoplatform.service.ActivityComposerConfigurationService;
+  import org.exoplatform.container.ExoContainerContext;
 
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager().require("SHARED/uiForm");
@@ -117,6 +119,8 @@
                             "});";
         
   jsManager.require("SHARED/jquery", "jq").addScripts(hint_text_script);
+  ActivityComposerConfigurationService activityComposerConfigurationService = (ActivityComposerConfigurationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ActivityComposerConfigurationService.class);
+  def userActivityComposerState = activityComposerConfigurationService.getUserActivityComposerState().equals("true");
 %>
 <div id="$uicomponent.id" class="uiUserActivitiesDisplay uiActivitiesDisplay clearfix"> <!-- use js to add beside one class that named "notSeen" if having some new updates  -->
 <% if (uicomponent.isWelcomeActivity()) { %>
@@ -128,7 +132,9 @@
 	</div>
   </div>
   <div class="clearfix activityTop">
-    <button class="btn btn-primary visible-phone changeStatus pull-left pull-right"><i class="uiIconEdit"></i> <%=_ctx.appRes("UIUserActivitiesDisplay.label.Status")%></button>
+	<% if(!userActivityComposerState) { %>
+		<button class="btn btn-primary visible-phone changeStatus pull-left pull-right"><i class="uiIconEdit"></i> <%=_ctx.appRes("UIUserActivitiesDisplay.label.Status")%></button>
+	<%}%>
     <div class="activityStreamStatus pull-left">
       <div class="arrowBottom"></div>
       <!--<span id="noUpdates"><%=noUpdates%></span>-->
@@ -185,7 +191,7 @@
 <% } else { %>
   <div class="clearfix activityTop">
     <!--hide Share button when show activity detail in responsive device -->
-    <%if (!uicomponent.isSingleContext() && (uicomponent.isActivityStreamOwner() || uicomponent.isRelationConfirmed())) { %>   
+    <%if (!uicomponent.isSingleContext() && (uicomponent.isActivityStreamOwner() || uicomponent.isRelationConfirmed()) && !userActivityComposerState) { %>   
       <button class="btn btn-primary visible-phone changeStatus pull-left"><i class="uiIconEdit"></i> <%=_ctx.appRes("UIUserActivitiesDisplay.label.Status")%></button>
     <% } %>
  <% if (Utils.isHomePage()) { %>
