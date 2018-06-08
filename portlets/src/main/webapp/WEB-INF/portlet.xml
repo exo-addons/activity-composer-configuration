@@ -17,7 +17,7 @@
 	      <portlet-mode>edit</portlet-mode>
 	    </supports>
 	    <supported-locale>fr</supported-locale>
-	    <resource-bundle>locale.portlets.activity-composer-configuration-portlet</resource-bundle>
+	    <resource-bundle>locale.portlets.activity-composer-configuration</resource-bundle>
 	    <portlet-info>
 	      <title>AS Composer Configuration Portlet</title>
 	      <keywords>AS Composer Configuration Portlet</keywords>

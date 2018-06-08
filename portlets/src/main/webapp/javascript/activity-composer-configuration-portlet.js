@@ -39,80 +39,77 @@ define("activityComposerConfigurationCtrl", ["SHARED/jquery", "SHARED/juzu-ajax"
 
 	    $scope.hideSpaceActivityComposer = function() {
 			$scope.resetSpaceMessages();
-			if ($scope.spaceWithActivityComposer != "") {
-				var hideSpaceActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.hideSpaceActivityComposer") + "&spaces=" + $scope.spaceWithActivityComposer;
-			    $http({
-			    	method: "GET",
-			        url: hideSpaceActivityComposerUrl
-			    }).then(function successCallback(response) {
-				    $scope.displaySpacesWithoutActivityComposer();
-				    $scope.displaySpacesWithActivityComposer();
-				    $scope.configureSpacesComposerResult = "success";
-				    $scope.configureSpacesComposerResultMessage = "Les espaces " + $scope.spaceWithActivityComposer + " sont désormais sans composer";
-				    $scope.spaceWithActivityComposer = '';
-				    $scope.spaceWithoutActivityComposer = '';
-			    }, function errorCallback(response) {
-			    	$scope.configureSpacesComposerResult = "failure";
-				    $scope.configureSpacesComposerResultMessage = "Erreur lors de l'ajout des espaces " + $scope.spaceWithActivityComposer + " à la liste des espaces sans composer";
-				    $scope.spaceWithActivityComposer = '';
-				    $scope.spaceWithoutActivityComposer = '';
-			    });
+			if ($scope.spaceWithActivityComposer == "") {
+				$scope.selectSpaceWithActivityComposerWarning = true;
+				return;
 			}
-			else {
-				$scope.selectSpaceWarning = "Vous devez selectionner un ou plusieurs espaces avec composer";
-			}
+			$scope.hideSpacesComposer = true;
+			var hideSpaceActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.hideSpaceActivityComposer") + "&spaces=" + $scope.spaceWithActivityComposer;
+			$http({
+				method: "GET",
+			    url: hideSpaceActivityComposerUrl
+			}).then(function successCallback(response) {
+				$scope.displaySpacesWithoutActivityComposer();
+				$scope.displaySpacesWithActivityComposer();
+				$scope.configureSpacesComposerResult = "success";
+				$scope.spaceWithActivityComposer = '';
+				$scope.spaceWithoutActivityComposer = '';
+			}, function errorCallback(response) {
+				$scope.configureSpacesComposerResult = "failure";
+				$scope.spaceWithActivityComposer = '';
+				$scope.spaceWithoutActivityComposer = '';
+			});
 	    };
 	    
 	    $scope.showSpaceActivityComposer = function() {
 	    	$scope.resetSpaceMessages();
-			if ($scope.spaceWithoutActivityComposer != "") {
-				var showSpaceActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.showSpaceActivityComposer") + "&spaces=" + $scope.spaceWithoutActivityComposer;
-			    $http({
-			    	method: "GET",
-			        url: showSpaceActivityComposerUrl
-			    }).then(function successCallback(response) {
-				    $scope.displaySpacesWithoutActivityComposer();
-				    $scope.displaySpacesWithActivityComposer();
-				    $scope.configureSpacesComposerResult = "success";
-				    $scope.configureSpacesComposerResultMessage = "Les espaces " + $scope.spaceWithoutActivityComposer + " sont désormais avec composer";
-				    $scope.spaceWithActivityComposer = '';
-				    $scope.spaceWithoutActivityComposer = '';
-			    }, function errorCallback(response) {
-			    	$scope.configureSpacesComposerResult = "failure";
-				    $scope.configureSpacesComposerResultMessage = "Erreur lors de l'ajout des espaces " + $scope.spaceWithoutActivityComposer + " à la liste des espaces avec composer";
-				    $scope.spaceWithActivityComposer = '';
-				    $scope.spaceWithoutActivityComposer = '';
-			    });
+			if ($scope.spaceWithoutActivityComposer == "") {
+				$scope.selectSpaceWithoutActivityComposerWarning = true;
+				return;
 			}
-			else {
-				$scope.selectSpaceWarning = "Vous devez selectionner un ou plusieurs espaces sans composer";
-			}
-	    };
-	    
-	    $scope.showHideUserActivityComposer = function() {
-			$scope.resetUserMessages();
-	    	var showHideUserActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.showHideUserActivityComposer") + "&hideUserActivityComposer=" + $scope.hideUserActivityComposer;
+			$scope.showSpacesComposer = true;
+			var showSpaceActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.showSpaceActivityComposer") + "&spaces=" + $scope.spaceWithoutActivityComposer;
 			$http({
 				method: "GET",
-			    url: showHideUserActivityComposerUrl
+			    url: showSpaceActivityComposerUrl
+			}).then(function successCallback(response) {
+				$scope.displaySpacesWithoutActivityComposer();
+				$scope.displaySpacesWithActivityComposer();
+				$scope.configureSpacesComposerResult = "success";
+				$scope.spaceWithActivityComposer = '';
+				$scope.spaceWithoutActivityComposer = '';
+			}, function errorCallback(response) {
+				$scope.configureSpacesComposerResult = "failure";
+				$scope.spaceWithActivityComposer = '';
+				$scope.spaceWithoutActivityComposer = '';
+			});
+	    };
+	    
+	    $scope.configureUserActivityComposer = function() {
+			$scope.resetUserMessages();
+			$scope.configureUsersComposer = true;
+	    	var configureUserActivityComposerUrl = $("#activityComposerConfiguration").jzURL("ActivityComposerConfigurationController.configureUserActivityComposer") + "&hideUserActivityComposer=" + $scope.hideUserActivityComposer;
+			$http({
+				method: "GET",
+			    url: configureUserActivityComposerUrl
 			}).then(function successCallback(response) {
 				$scope.configureUsersComposerResult = "success";
-			    $scope.configureUsersComposerResultMessage = "La file d'actualité des utilisateurs est désormais " + ($scope.hideUserActivityComposer ? "sans" : "avec") + " composer";
 			}, function errorCallback(response) {
 				$scope.configureUsersComposerResult = "failure";
-			    $scope.configureUsersComposerResultMessage = "Erreur de configuration du composer de la file d'actualité des utilisateurs";
 			});
 	    };
 	    
 	    $scope.resetSpaceMessages = function() {
-	    	$scope.selectSpaceWarning = '';
+	    	$scope.selectSpaceWithActivityComposerWarning = false;
+	    	$scope.selectSpaceWithoutActivityComposerWarning = false;
 	    	$scope.configureSpacesComposerResult = '';
-	    	$scope.configureSpacesComposerResultMessage = '';
+	    	$scope.hideSpacesComposer = false;
+	    	$scope.showSpacesComposer = false;
 	    };
 	    
 	    $scope.resetUserMessages = function() {
 	    	$scope.configureUsersComposerResult = '';
-	    	$scope.configureUsersComposerResultMessage = '';
+	    	$scope.configureUsersComposer = false;
 	    };
 	    
 	    $scope.init = function() {

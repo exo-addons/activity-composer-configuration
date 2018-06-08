@@ -109,8 +109,8 @@ public class ActivityComposerConfigurationController {
     
     @Ajax
     @Resource
-    public Response showHideUserActivityComposer(String hideUserActivityComposer) {
-      activityComposerConfigurationService.showHideUserActivityComposer(hideUserActivityComposer);
+    public Response configureUserActivityComposer(String hideUserActivityComposer) {
+      activityComposerConfigurationService.configureUserActivityComposer(hideUserActivityComposer);
       return Response.ok();
     }
 }

@@ -60,16 +60,16 @@ public class ActivityComposerConfigurationService {
   public void hideSpaceActivityComposer(String spaces) {
     SettingValue spacesWithoutActivityComposerSetting = settingService.get(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER);
     String spacesWithoutActivityComposer = spacesWithoutActivityComposerSetting != null ? (String) spacesWithoutActivityComposerSetting.getValue() : "";
-    settingService.set(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER, SettingValue.create(spacesWithoutActivityComposer + spaces.replace(",", SPACES_SEPARATOR) + SPACES_SEPARATOR));
+    settingService.set(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER, SettingValue.create(spacesWithoutActivityComposer + (spaces.startsWith(",") ? spaces.substring(0).replace(",", SPACES_SEPARATOR) : spaces.replace(",", SPACES_SEPARATOR)) + SPACES_SEPARATOR));
   }
   
   public void showSpaceActivityComposer(String spaces) {
     SettingValue spacesWithoutActivityComposerSetting = settingService.get(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER);
     String spacesWithoutActivityComposer = spacesWithoutActivityComposerSetting != null ? (String) spacesWithoutActivityComposerSetting.getValue() : "";
-    settingService.set(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER, SettingValue.create(spacesWithoutActivityComposer.replace(spaces.replace(",", SPACES_SEPARATOR) + SPACES_SEPARATOR, "")));
+    settingService.set(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER, SettingValue.create(spacesWithoutActivityComposer.replace((spaces.startsWith(",") ? spaces.substring(0).replace(",", SPACES_SEPARATOR) : spaces.replace(",", SPACES_SEPARATOR)) + SPACES_SEPARATOR, "")));
   }
   
-  public void showHideUserActivityComposer(String hideUserActivityComposer) {
+  public void configureUserActivityComposer(String hideUserActivityComposer) {
     settingService.set(Context.GLOBAL, Scope.GLOBAL, HIDE_USER_ACTIVITY_COMPOSER, SettingValue.create(hideUserActivityComposer));
   }
   
