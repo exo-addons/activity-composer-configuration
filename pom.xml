@@ -26,8 +26,8 @@
         <groupId>org.exoplatform.addons</groupId>
         <version>8</version>
     </parent>
-    <groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
-    <artifactId>activity-composer-configuration-addon</artifactId>
+    <groupId>org.exoplatform.addons.activity-composer-configuration</groupId>
+    <artifactId>activity-composer-configuration</artifactId>
     <version>1.0.x-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>AS composer configuration addon</name>
@@ -62,22 +62,22 @@
             </dependency>
             <!-- Declare our own artifacts -->
             <dependency>
-                <groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
-                <artifactId>activity-composer-configuration-addon-service</artifactId>
+                <groupId>org.exoplatform.addons.activity-composer-configuration</groupId>
+                <artifactId>activity-composer-configuration-service</artifactId>
                 <version>${project.version}</version>
                 <type>jar</type>
             </dependency>
 
             <dependency>
-                <groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
-                <artifactId>activity-composer-configuration-addon-webapp</artifactId>
+                <groupId>org.exoplatform.addons.activity-composer-configuration</groupId>
+                <artifactId>activity-composer-configuration-webapp</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
 			
 			<dependency>
-                <groupId>org.exoplatform.addons.activity-composer-configuration-addon</groupId>
-                <artifactId>activity-composer-configuration-addon-portlets</artifactId>
+                <groupId>org.exoplatform.addons.activity-composer-configuration</groupId>
+                <artifactId>activity-composer-configuration-portlets</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
