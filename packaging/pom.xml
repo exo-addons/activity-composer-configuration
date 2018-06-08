@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.exoplatform.addons.activity-composer-configuration</groupId>
     <artifactId>activity-composer-configuration</artifactId>
-    <version>1.0.x-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>activity-composer-configuration-packaging</artifactId>
   <name>AS composer configuration addon - Packaging</name>
