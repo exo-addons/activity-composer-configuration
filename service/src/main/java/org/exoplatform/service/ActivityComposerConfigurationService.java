@@ -1,6 +1,7 @@
 package org.exoplatform.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.exoplatform.commons.api.settings.SettingService;
@@ -78,10 +79,11 @@ public class ActivityComposerConfigurationService {
     Space[] allSpaces = allSpacesListAccess.load(0, allSpacesListAccess.getSize());
     SettingValue spacesWithoutActivityComposerSetting = settingService.get(Context.GLOBAL, Scope.GLOBAL, SPACES_WITHOUT_ACTIVITY_COMPOSER);
     String spacesWithoutActivityComposer = spacesWithoutActivityComposerSetting != null ? (String) spacesWithoutActivityComposerSetting.getValue() : "";
+    List<String> spacesWithoutList= Arrays.asList(spacesWithoutActivityComposer.split(";"));
     listSpacesWithoutActivityComposer = new ArrayList<Space>();
     listSpacesWithActivityComposer = new ArrayList<Space>();
     for (Space space : allSpaces) {
-      if (!spacesWithoutActivityComposer.isEmpty() && spacesWithoutActivityComposer.contains(space.getPrettyName())) {
+      if (!spacesWithoutActivityComposer.isEmpty() && spacesWithoutList.contains(space.getPrettyName())) {
         listSpacesWithoutActivityComposer.add(space);
       }
       else {
